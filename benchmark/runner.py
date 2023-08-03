@@ -60,8 +60,9 @@ class JobWorker(Process):
                         cur_score = self.get_accuracy(cur_job.clf_name, cur_job.clf_par, j)
                         acc.append(cur_score)
                         if len(acc) == 2 and abs(acc[0] - cur_score) < 1e-3:
-                            LOGGER.info('%s is invariant to training data shuffling, will stop repeating!' %
-                                        cur_job.clf_name)
+                            LOGGER.info(
+                                f'{cur_job.clf_name} is invariant to training data shuffling, will stop repeating!'
+                            )
                             break
                     cur_job.done_time = now_int()
                     test_info = {
@@ -85,9 +86,11 @@ class JobWorker(Process):
                                                       cur_job.clf_name,
                                                       cur_job.clf_par))
                 except Exception as e:
-                    LOGGER.error('%s with %s failed! reason: %s' % (cur_job.clf_name, cur_job.clf_par, e))
+                    LOGGER.error(f'{cur_job.clf_name} with {cur_job.clf_par} failed! reason: {e}')
             else:
-                LOGGER.error('Can not found "%s" in scikit-learn, missing import?' % cur_job.clf_name)
+                LOGGER.error(
+                    f'Can not found "{cur_job.clf_name}" in scikit-learn, missing import?'
+                )
 
     def get_accuracy(self, clf_name, clf_par, id):
         start_time = time.clock()
@@ -168,7 +171,7 @@ class JobManager:
         Xs, Ys = shuffle(Xt, Yt)
         num_dummy = 10
         Xs = Xs[:num_dummy]
-        Ys = [j for j in range(10)]
+        Ys = list(range(10))
         valid_jobs = []
         for v in all_tasks:
             clf_name = list(v.keys())[0]
@@ -179,7 +182,9 @@ class JobManager:
                 valid_jobs.append(PredictJob(clf_name, clf_par, self.num_repeat))
             except Exception as e:
                 failed_clf += 1
-                LOGGER.error('Can not create classifier "%s" with parameter "%s". Reason: %s' % (clf_name, clf_par, e))
+                LOGGER.error(
+                    f'Can not create classifier "{clf_name}" with parameter "{clf_par}". Reason: {e}'
+                )
         LOGGER.info('%d classifiers to test, %d fail to create!' % (total_clf, failed_clf))
         return valid_jobs
 

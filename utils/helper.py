@@ -25,13 +25,14 @@ def upload_result_s3():
     LOGGER.info("Syncing data to S3...")
     with open(LOG_PATH, 'a', 1) as logfile:
         proc = subprocess.Popen(
-            "bash %s %s" % (SYNC_SCRIPT_PATH, RESULT_PATH),
+            f"bash {SYNC_SCRIPT_PATH} {RESULT_PATH}",
             shell=True,
             stdin=subprocess.PIPE,
             stdout=logfile,
             stderr=logfile,
             cwd=ROOT_DIR,
-            env=os.environ)
+            env=os.environ,
+        )
 
         # we have to wait until the training data is downloaded
         try:

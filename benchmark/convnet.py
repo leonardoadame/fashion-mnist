@@ -136,7 +136,7 @@ def main(unused_argv):
         num_epochs=1,
         shuffle=False)
 
-    for j in range(100):
+    for _ in range(100):
         mnist_classifier.train(
             input_fn=train_input_fn,
             steps=2000)
