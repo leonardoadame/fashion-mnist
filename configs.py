@@ -6,29 +6,29 @@ LOG_FORMAT = '%(asctime)-15s %(filename)s:%(funcName)s:[%(levelname)s] %(message
 JSON_FORMAT = '%(message)s'
 
 RUN_LOCALLY = False
-ROOT_DIR = os.path.dirname(os.path.abspath(__file__)) + '/'
-TEST_DIR = ROOT_DIR + 'test/'
-DATA_DIR = ROOT_DIR + 'data/fashion'
-VIS_DIR = ROOT_DIR + 'visualization/'
-MODEL_SAVE_DIR = ROOT_DIR + 'save/'
+ROOT_DIR = f'{os.path.dirname(os.path.abspath(__file__))}/'
+TEST_DIR = f'{ROOT_DIR}test/'
+DATA_DIR = f'{ROOT_DIR}data/fashion'
+VIS_DIR = f'{ROOT_DIR}visualization/'
+MODEL_SAVE_DIR = f'{ROOT_DIR}save/'
 MULTI_TASK_MODEL = '20170814-153653'
-TEST_DATA_DIR = TEST_DIR + 'data/'
-LOG_DIR = ROOT_DIR + 'log/'
-RESULT_DIR = ROOT_DIR + 'result/'
-TEMPLATE_DIR = ROOT_DIR + 'templates/'
-STATIC_DIR = ROOT_DIR + 'static/'
-SCRIPT_DIR = ROOT_DIR + 'script/'
-BASELINE_PATH = ROOT_DIR + 'benchmark/baselines.json'
+TEST_DATA_DIR = f'{TEST_DIR}data/'
+LOG_DIR = f'{ROOT_DIR}log/'
+RESULT_DIR = f'{ROOT_DIR}result/'
+TEMPLATE_DIR = f'{ROOT_DIR}templates/'
+STATIC_DIR = f'{ROOT_DIR}static/'
+SCRIPT_DIR = f'{ROOT_DIR}script/'
+BASELINE_PATH = f'{ROOT_DIR}benchmark/baselines.json'
 
 Q2A_SUFFIX = '-merged-ad1-20170501+36D+20170605.json.gz'
 
-SYNC_SCRIPT_PATH = SCRIPT_DIR + 'sync_s3.sh'
-DOWNLOAD_SCRIPT_PATH = SCRIPT_DIR + 'load_s3_json.sh'
+SYNC_SCRIPT_PATH = f'{SCRIPT_DIR}sync_s3.sh'
+DOWNLOAD_SCRIPT_PATH = f'{SCRIPT_DIR}load_s3_json.sh'
 LOG_PATH = LOG_DIR + APP_NAME + '.log'
 RESULT_PATH = RESULT_DIR + APP_NAME + '.json'
 
-Q2A_PATH = DATA_DIR + "query2brand-train.tfr"
-Q2A_INFO = DATA_DIR + "query2brand.json"
+Q2A_PATH = f"{DATA_DIR}query2brand-train.tfr"
+Q2A_INFO = f"{DATA_DIR}query2brand.json"
 MAX_ITEM_PER_ATTRIBUTE = 20
 
 LOSS_JITTER = 1e-4
@@ -36,7 +36,7 @@ SYNC_INTERVAL = 300.0  # sync every 5 minutes
 SYNC_TIMEOUT = 600
 FIRST_SYNC_DELAY = 300.0  # do the first task only after 5 minutes.
 
-RNN_ARGS_JSON = ROOT_DIR + 'nn/queryclf/config.json'
+RNN_ARGS_JSON = f'{ROOT_DIR}nn/queryclf/config.json'
 
 Q2A_JSON_AKEY1 = 'attributes'
 Q2A_JSON_AKEY2 = 'value'
@@ -87,4 +87,4 @@ def get_json_logger(name: str):
 
 
 LOGGER = _get_logger(__name__)
-JSON_LOGGER = get_json_logger('json' + __name__)
+JSON_LOGGER = get_json_logger(f'json{__name__}')

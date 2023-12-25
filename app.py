@@ -14,7 +14,7 @@ def start_s3_sync():
 
 if __name__ == "__main__":
     arg_dict = get_args_cli()
-    LOGGER.info('received task with args: %s' % arg_dict)
+    LOGGER.info(f'received task with args: {arg_dict}')
     start_s3_sync()
     jm = JobManager(**arg_dict)
     jm.start()

@@ -26,13 +26,13 @@ config = projector.ProjectorConfig()
 embedding = config.embeddings.add()
 embedding.tensor_name = embedding_var.name
 # Link this tensor to its metadata file (e.g. labels).
-embedding.metadata_path = VIS_DIR + 'Ytest.tsv'
-embedding.sprite.image_path = VIS_DIR + 'zalando-mnist-sprite.png'
+embedding.metadata_path = f'{VIS_DIR}Ytest.tsv'
+embedding.sprite.image_path = f'{VIS_DIR}zalando-mnist-sprite.png'
 # Specify the width and height of a single thumbnail.
 embedding.sprite.single_image_dim.extend([28, 28])
 
 # Use the same LOG_DIR where you stored your checkpoint.
-summary_writer = tf.summary.FileWriter(LOG_DIR + 'visualization')
+summary_writer = tf.summary.FileWriter(f'{LOG_DIR}visualization')
 
 # The next line writes a projector_config.pbtxt in the LOG_DIR. TensorBoard will
 # read this file during startup.
@@ -40,4 +40,4 @@ projector.visualize_embeddings(summary_writer, config)
 sess = tf.Session()
 sess.run(tf.global_variables_initializer())
 saver = tf.train.Saver()
-saver.save(sess, LOG_DIR + 'visualization/model.ckpt', 0)
+saver.save(sess, f'{LOG_DIR}visualization/model.ckpt', 0)
